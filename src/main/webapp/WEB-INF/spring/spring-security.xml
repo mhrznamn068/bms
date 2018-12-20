@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:security="http://www.springframework.org/schema/security"
+
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+          http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.0.xsd
+          http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd
+          http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-4.0.xsd
+          http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.0.xsd">
+ <!-- enable use-expressions -->
+ <security:http auto-config="true" use-expressions="true">
+  	<security:intercept-url pattern="/admin/**" access="hasRole('ROLE_ADMIN')" />
+  	<security:intercept-url pattern="/moderator/**" access="hasAnyRole('ROLE_MODERATOR','ROLE_ADMIN')"/>
+  	<security:intercept-url pattern="/user/**" access="hasRole('ROLE_USER')"/>
+	<security:intercept-url pattern="/home**" access="permitAll" />
+	<security:intercept-url pattern="/product**" access="permitAll" />
+	<security:intercept-url pattern="/getSearch**" access="permitAll" />
+
+  <!-- access denied page -->
+  <security:access-denied-handler error-page="/noaccess" />
+<security:form-login login-processing-url="/j_spring_security_check" login-page="/login" 
+           username-parameter="j_username" password-parameter="j_password"  authentication-failure-url="/loginfailed" authentication-success-handler-ref="customSuccessHandler"/>
+  <security:logout logout-success-url="/logout" delete-cookies="JSESSIONID" invalidate-session="true" />
+  <!--enable remember me--> 
+	<security:remember-me
+        token-validity-seconds="1209600" remember-me-parameter="remember_me_param" data-source-ref="dataSource" />
+  
+  <!-- enable csrf protection -->
+  <security:csrf/>
+ </security:http>
+
+ 
+ <security:authentication-manager>
+ 	<security:authentication-provider>
+ 		<security:jdbc-user-service data-source-ref="dataSource"  
+      users-by-username-query="select username, password, status from users where username=?" 
+          authorities-by-username-query="select username,role from users where username=? "/>
+         <security:password-encoder hash="bcrypt" />
+ </security:authentication-provider>
+ </security:authentication-manager>
+	<bean id="customSuccessHandler"  class="com.bms.handler.CustomSuccessHandler" />
+
+</beans>

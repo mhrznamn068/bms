@@ -1,0 +1,89 @@
+.navbar{
+	background:url(../resources/banner_02.jpg) no-repeat center center;
+    background-size:cover;  
+	
+}
+
+a{
+	color:black;
+}
+
+.navbar-brand img{
+	margin-left:20px;
+	height:30px;
+	width:30px;
+	color:white;
+}
+
+.middle-content{
+	height:500px;
+	
+}
+
+.sidebar{
+	border:1px solid grey;
+    height:480px;
+}
+
+
+a.list-group-item{
+	background-color:white;
+	color:black;
+}
+
+.carousel-inner .item img{
+	height:480px;
+	width:1000px;
+}
+
+.lead{
+	text-align:center;	
+	color:black;
+}
+
+h2.title {
+    color: #FE980F;
+    font-family: 'Roboto', sans-serif;
+    font-size: 18px;
+    font-weight: 700;
+    margin: 0 15px;
+    text-transform: uppercase;
+    text-align:center;
+    position: relative;
+}
+
+.content2{
+	margin-top:30px;
+}
+.thumbnail{
+	height:300px;
+	width:250px;
+}
+
+.thumbnail img{
+	height:150px;
+	width:100px;
+}
+
+.ratings .addcart{
+	text-align:center;
+}
+
+.sideimg img{
+	border:1px solid grey;
+}
+
+.imgdetails{
+	border:1px solid grey;
+}
+
+.shipcart{
+	border:1px solid grey;
+}
+
+footer{
+border-top: none;
+background: black;
+height:200px;
+}
+

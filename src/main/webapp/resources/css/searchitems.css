@@ -1,0 +1,9 @@
+.searchitems .listofbags img{
+	height:200px;
+	width:200px;
+}
+
+.pagination ul li{
+	
+	display: inline;
+}
